@@ -2,6 +2,11 @@ import smtplib
 import ssl
 from email.message import EmailMessage
 import csv as c
+from typing import Optional, Tuple, Union
+import customtkinter as ctk
+from customtkinter import CTkFont
+
+ctk.set_default_color_theme("dark-blue")
 
 class User():
     def __init__(self, username, password, email_address):
@@ -88,8 +93,28 @@ new_user = User(username="", password="", email_address="")
 user_email = Email(email_address="", username="", subject="", body="")
 
 # Calling the login method
-user_email.login()
+#user_email.login()
 
 # Use the send_message method to send an email using the logged-in user information
-user_email.send_message()
+#user_email.send_message()
 
+
+
+class Loginwindow(ctk.CTk):
+    def __init__(self):
+        super().__init__()
+        self.title("Welcome")
+        self._create_login_screen()
+        #self._create_main_screen()  #add to another window class
+
+    def _create_login_screen(self):
+        self.geometry("600x400")
+        display_frame = ctk.CTkFrame(master=self)
+        display_frame.pack(fill=ctk.X)
+        self.display = ctk.CTkLabel(
+            master=display_frame, text="Login in", font=ctk.CTkFont(size=28, weight="bold"),
+            )
+        self.display.pack(pady=20, padx=60, fill="both", expand = True)
+
+screen = Loginwindow()
+screen.mainloop()
