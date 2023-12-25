@@ -103,18 +103,43 @@ user_email = Email(email_address="", username="", subject="", body="")
 class Loginwindow(ctk.CTk):
     def __init__(self):
         super().__init__()
-        self.title("Welcome")
+        self.title("Email Sender")
         self._create_login_screen()
         #self._create_main_screen()  #add to another window class
 
     def _create_login_screen(self):
-        self.geometry("600x400")
-        display_frame = ctk.CTkFrame(master=self)
-        display_frame.pack(fill=ctk.X)
-        self.display = ctk.CTkLabel(
-            master=display_frame, text="Login in", font=ctk.CTkFont(size=28, weight="bold"),
+        self.geometry("500x350")
+        display_frame = ctk.CTkFrame(master=self, height=400, width=250)
+        display_frame.pack(ipadx=50, ipady=10, padx=20, pady=10, fill="both")
+        
+        self.login_text = ctk.CTkLabel(
+            master=display_frame, text="Login", font=ctk.CTkFont(size=28, weight="bold"),
             )
-        self.display.pack(pady=20, padx=60, fill="both", expand = True)
+        self.login_text.pack(pady=20, padx=60, fill="none", expand = True)
 
+        self.user_field = ctk.CTkLabel(
+            master=display_frame, text="Username", font=ctk.CTkFont(size=12, weight="bold"),
+            )
+        self.user_field.pack(pady=10, side=ctk.TOP, fill="none", expand= False)
+
+        self.user_input = ctk.CTkEntry(
+            master=display_frame, text_color="black", placeholder_text="Username", placeholder_text_color="gray"
+            )
+        self.user_input.pack(fill="none", expand= False)
+
+        self.pass_field = ctk.CTkLabel(
+            master=display_frame, text="Password", font=ctk.CTkFont(size=12, weight="bold"),
+            )
+        self.pass_field.pack(pady=10, side=ctk.TOP, fill="none", expand= False)
+
+        self.pass_input = ctk.CTkEntry(
+            master=display_frame, text_color="black", placeholder_text="Password", placeholder_text_color="gray"
+            )
+        self.pass_input.pack(fill="none", expand= False)
+
+        self.login_bttn = ctk.CTkButton(
+            master=display_frame, fg_color="gray", border_color="black", text="Login", hover_color="darkgray",
+            )
+        self.login_bttn.pack(pady=5, side=ctk.TOP, fill="none", expand= False)
 screen = Loginwindow()
 screen.mainloop()
