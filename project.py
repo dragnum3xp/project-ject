@@ -154,12 +154,19 @@ class Loginwindow(ctk.CTk):
         self.login_bttn.pack(pady=5, side=ctk.TOP, fill="none", expand=False)
         self.login_bttn.bind("<Button-1>", self.login_logic)
 
+        self.new_button = ctk.CTkButton(
+            master=display_frame, fg_color="gray", border_color="black", text="New User", hover_color="darkgray", command=self.create_user
+        )
+        self.new_button.pack(pady=5, side=ctk.TOP, fill="none", expand=False)
+
+        self.create_user_window = None
+
     def login_logic(self, event):
         self.exist_user.username = self.user_input.get()
         self.exist_user.password = self.pass_input.get()
 
         # Validate the username and password
-        if not self.new_user.username or not self.new_user.password:
+        if not self.exist_user.username or not self.exist_user.password:
             print("Please enter both username and password.")
             return
 
@@ -169,6 +176,65 @@ class Loginwindow(ctk.CTk):
             # Here you can proceed to the next screen or perform other actions
         else:
             print("Invalid username or password.")
+
+    def create_user(self):
+        if self.create_user_window is None or not self.create_user_window.winfo_exists():
+            self.create_user_window = Registerwindow(self)  # create window if it's None or destroyed
+        else:
+            self.create_user_window.focus()
+
+
+class Registerwindow(ctk.CTkToplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("New User")
+        self.master = master
+        self.new_user = User(username="", password="", email_address="")
+        self._create_register_screen()
+
+    def _create_register_screen(self):
+        display_frame = ctk.CTkFrame(master=self, height=400, width=250)
+        display_frame.pack(ipadx=50, ipady=10, padx=20, pady=10, fill="both")
+
+        self.login_text = ctk.CTkLabel(
+            master=display_frame, text="Register", font=ctk.CTkFont(size=20, weight="bold"),
+        )
+        self.login_text.pack(pady=20, padx=60, fill="none", expand=True)
+
+        self.create_user = ctk.CTkEntry(
+            master=display_frame, text_color="black", placeholder_text="Create Username", placeholder_text_color="gray"
+        )
+        self.create_user.pack(fill="none", expand=False)
+
+        self.create_pass = ctk.CTkEntry(
+            master=display_frame, text_color="black", placeholder_text="Create Password", placeholder_text_color="gray"
+        )
+        self.create_pass.pack(fill="none", expand=False)
+
+        self.add_email = ctk.CTkEntry(
+            master=display_frame, text_color="black", placeholder_text="Email Addres", placeholder_text_color="gray"
+        )
+        self.add_email.pack(fill="none", expand=False)
+
+        self.add_bttn = ctk.CTkButton(
+            master=display_frame, fg_color="gray", border_color="black", text="Create User", hover_color="darkgray",
+        )
+        self.add_bttn.pack(pady=5, side=ctk.TOP, fill="none", expand=False)
+        self.add_bttn.bind("<Button-1>", self.add_logic)
+        
+        self.focus_force()
+
+    def add_logic(self, event):
+        self.new_user.username = self.create_user.get()
+        self.new_user.password = self.create_pass.get()
+        self.new_user.email_address = self.add_email.get()
+
+        with open("users.csv", "a") as n_user:
+            n_user.write(f"{self.new_user.username}, {self.new_user.password}, {self.new_user.email_address}\n")
+
+        self.destroy()
+
+
 
 
 screen = Loginwindow()
