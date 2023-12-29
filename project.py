@@ -175,15 +175,3 @@ screen = Loginwindow()
 screen.mainloop()
 
 
-
-screen = Loginwindow()
-screen.mainloop()
-
-
-
-
-
-
-
-screen = Loginwindow()
-screen.mainloop()
