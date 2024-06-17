@@ -163,3 +163,5 @@ cython_debug/
 #Other files 
 tic_tac.py
 dark-blue.json
+users.csv
+project.py
