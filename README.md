@@ -19,13 +19,14 @@ Input your key in the variable:
 
  Build your message within the function:
 
+ ```python
  def send_message(self):
         print("New Email")
         self.subject = str(input("Subject: "))
         self.body = str(input("Body of the Email: "))
         sender_email = self.email_address
         receiver_email = input("Enter the email of the receiver: ")
- 
+ ```
  Run the code, and create a username and password.
  
 
