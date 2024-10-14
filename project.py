@@ -96,7 +96,7 @@ if choice == "1":
 elif choice == "2":
     user_email.new_user()
 
-user_email.message()
+user_email.send_message()
     
 
 # Use the send_message method to send an email using the logged-in user information
