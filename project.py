@@ -69,7 +69,7 @@ class Email(User):
 
         message.add_alternative(html, subtype="html")
 
-        key = "plsv tdgj clud kvxr"
+        key = "API_KEY"
         context = ssl.create_default_context()
 
         print("Sending Email!")
