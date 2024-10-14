@@ -87,9 +87,18 @@ class Email(User):
 new_user = User(username="", password="", email_address="")
 user_email = Email(email_address="", username="", subject="", body="")
 
-# Calling the login method
-user_email.login()
+# Calling the login method or creating a user
+print("Please Select")
+print()
+choice = input(" 1 - Login \n2 - Create a User")
+if choice == "1":
+    user_email.login()
+elif choice == "2":
+    user_email.new_user()
+
+user_email.message()
+    
 
 # Use the send_message method to send an email using the logged-in user information
-user_email.send_message()
+
 
